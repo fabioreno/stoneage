@@ -15,11 +15,16 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description = "User entity. Main domain object.")
 @Entity
 @Table(name = "USER")
 public class User 
@@ -28,6 +33,8 @@ public class User
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Size(min = 3, message = "Name should have at least 3 characters.")
+	@ApiModelProperty(notes = "Name should have at least 3 characters.")
 	private String name;
 		
 	@OneToMany(mappedBy = "user")

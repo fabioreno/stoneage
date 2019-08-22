@@ -32,13 +32,23 @@ public class RettiwtResponseEntityExceptionHandler extends
 	}
 	
 	@ExceptionHandler(value = NotFoundException.class)
-	public final ResponseEntity<Object> handleUserNotFoundException(
+	public final ResponseEntity<Object> handleNotFoundException(
 			NotFoundException ex, WebRequest request) throws Exception
 	{
 		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), 
 				ex.getMessage(), request.getDescription(false));
 		
 		return new ResponseEntity<>(exceptionResponse, NOT_FOUND);
+	}
+	
+	@ExceptionHandler(value = UserFollowException.class)
+	public final ResponseEntity<Object> handleUserFollowException(
+			UserFollowException ex, WebRequest request) throws Exception
+	{
+		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), 
+				ex.getMessage(), request.getDescription(false));
+		
+		return new ResponseEntity<>(exceptionResponse, BAD_REQUEST);
 	}
 	
 	@Override

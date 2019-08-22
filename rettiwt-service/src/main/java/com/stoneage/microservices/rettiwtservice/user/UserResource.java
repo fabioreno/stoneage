@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.stoneage.microservices.rettiwtservice.exception.NotFoundException;
+import com.stoneage.microservices.rettiwtservice.exception.UserFollowException;
 
 @RestController
 public class UserResource 
@@ -104,6 +105,12 @@ public class UserResource
 	public ResponseEntity<Object> createFollow(@PathVariable Long userId,
 			@PathVariable Long followedId)
 	{
+		if (userId.equals(followedId))
+		{
+			throw new UserFollowException(
+					"User can't follow itself: " + userId);
+		}
+				
 		Optional<User> userOptional = userRepository.findById(userId);
 		if (!userOptional.isPresent())
 		{

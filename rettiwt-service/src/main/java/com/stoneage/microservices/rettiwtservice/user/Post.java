@@ -7,11 +7,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description = "Post entity. Contains a message and is always linked to a user.")
 @Entity
 @Table(name = "POST")
 public class Post 
@@ -20,6 +25,10 @@ public class Post
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Size(max = 140, 
+			message = "Message should have a maximum of 140 characters.")
+	@ApiModelProperty(
+			notes = "Message should have a maximum of 140 characters.")
 	private String message;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
