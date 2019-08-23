@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(code = HttpStatus.BAD_REQUEST)
 public class UserFollowException extends RuntimeException 
 {
-	public UserFollowException(String message) 
-	{
-		super(message);
-	}
+    public UserFollowException(String message) 
+    {
+        super(message);
+    }
 }

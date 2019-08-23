@@ -21,68 +21,68 @@ import io.swagger.annotations.ApiModelProperty;
 @Table(name = "POST")
 public class Post 
 {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Size(max = 140, 
-			message = "Message should have a maximum of 140 characters.")
-	@ApiModelProperty(
-			notes = "Message should have a maximum of 140 characters.")
-	private String message;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnore
-	private User user;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Size(max = 140, 
+            message = "Message should have a maximum of 140 characters.")
+    @ApiModelProperty(
+            notes = "Message should have a maximum of 140 characters.")
+    private String message;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private User user;
 
-	public Post() 
-	{
-	}
-	
-	public Post(Long id, String message, User user) 
-	{
-		super();
-		this.id = id;
-		this.message = message;
-		this.user = user;
-	}
+    public Post() 
+    {
+    }
+    
+    public Post(Long id, String message, User user) 
+    {
+        super();
+        this.id = id;
+        this.message = message;
+        this.user = user;
+    }
 
-	public Long getId() 
-	{
-		return id;
-	}
+    public Long getId() 
+    {
+        return id;
+    }
 
-	public void setId(Long id) 
-	{
-		this.id = id;
-	}
+    public void setId(Long id) 
+    {
+        this.id = id;
+    }
 
-	public String getMessage() 
-	{
-		return message;
-	}
+    public String getMessage() 
+    {
+        return message;
+    }
 
-	public void setMessage(String message) 
-	{
-		this.message = message;
-	}
+    public void setMessage(String message) 
+    {
+        this.message = message;
+    }
 
-	public User getUser() 
-	{
-		return user;
-	}
+    public User getUser() 
+    {
+        return user;
+    }
 
-	public void setUser(User user) 
-	{
-		this.user = user;
-	}
+    public void setUser(User user) 
+    {
+        this.user = user;
+    }
 
-	@Override
-	public String toString() 
-	{
-		return new ToStringCreator(this)
-				.append("id", id)
-				.append("message", message)
-				.toString();
-	}
+    @Override
+    public String toString() 
+    {
+        return new ToStringCreator(this)
+                .append("id", id)
+                .append("message", message)
+                .toString();
+    }
 }

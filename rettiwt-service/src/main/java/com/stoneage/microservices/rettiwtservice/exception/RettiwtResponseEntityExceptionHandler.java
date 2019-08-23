@@ -19,46 +19,46 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 @RestController
 public class RettiwtResponseEntityExceptionHandler extends 
-	ResponseEntityExceptionHandler
+    ResponseEntityExceptionHandler
 {
-	@ExceptionHandler(value = Exception.class)
-	public final ResponseEntity<Object> handleAllExceptions(Exception ex, 
-			WebRequest request) throws Exception
-	{
-		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), 
-				ex.getMessage(), request.getDescription(false));
-		
-		return new ResponseEntity<>(exceptionResponse, INTERNAL_SERVER_ERROR);
-	}
-	
-	@ExceptionHandler(value = NotFoundException.class)
-	public final ResponseEntity<Object> handleNotFoundException(
-			NotFoundException ex, WebRequest request) throws Exception
-	{
-		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), 
-				ex.getMessage(), request.getDescription(false));
-		
-		return new ResponseEntity<>(exceptionResponse, NOT_FOUND);
-	}
-	
-	@ExceptionHandler(value = UserFollowException.class)
-	public final ResponseEntity<Object> handleUserFollowException(
-			UserFollowException ex, WebRequest request) throws Exception
-	{
-		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), 
-				ex.getMessage(), request.getDescription(false));
-		
-		return new ResponseEntity<>(exceptionResponse, BAD_REQUEST);
-	}
-	
-	@Override
-	protected ResponseEntity<Object> handleMethodArgumentNotValid(
-			MethodArgumentNotValidException ex, HttpHeaders headers, 
-			HttpStatus status, WebRequest request) 
-	{
-		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), 
-				"Validation Failed", ex.getBindingResult().toString());
-		
-		return new ResponseEntity<>(exceptionResponse, BAD_REQUEST);
-	}
+    @ExceptionHandler(value = Exception.class)
+    public final ResponseEntity<Object> handleAllExceptions(Exception ex, 
+            WebRequest request) throws Exception
+    {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), 
+                ex.getMessage(), request.getDescription(false));
+        
+        return new ResponseEntity<>(exceptionResponse, INTERNAL_SERVER_ERROR);
+    }
+    
+    @ExceptionHandler(value = NotFoundException.class)
+    public final ResponseEntity<Object> handleNotFoundException(
+            NotFoundException ex, WebRequest request) throws Exception
+    {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), 
+                ex.getMessage(), request.getDescription(false));
+        
+        return new ResponseEntity<>(exceptionResponse, NOT_FOUND);
+    }
+    
+    @ExceptionHandler(value = UserFollowException.class)
+    public final ResponseEntity<Object> handleUserFollowException(
+            UserFollowException ex, WebRequest request) throws Exception
+    {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), 
+                ex.getMessage(), request.getDescription(false));
+        
+        return new ResponseEntity<>(exceptionResponse, BAD_REQUEST);
+    }
+    
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex, HttpHeaders headers, 
+            HttpStatus status, WebRequest request) 
+    {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), 
+                "Validation Failed", ex.getBindingResult().toString());
+        
+        return new ResponseEntity<>(exceptionResponse, BAD_REQUEST);
+    }
 }
