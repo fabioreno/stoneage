@@ -79,7 +79,7 @@ public class UserResource
 	@PostMapping(path = "/rettiwt-service/users/{userId}/posts")
 	public ResponseEntity<Object> createPost(
 			@PathVariable Long userId, 
-			@RequestBody Post post)
+			@RequestBody @Valid Post post)
 	{
 		Optional<User> userOptional = userRepository.findById(userId);
 		if (!userOptional.isPresent())
@@ -142,6 +142,12 @@ public class UserResource
 	public void deleteFollow(@PathVariable Long userId, 
 			@PathVariable Long followedId)
 	{
+		if (userId.equals(followedId))
+		{
+			throw new UserFollowException(
+					"User can't unfollow itself: " + userId);
+		}
+		
 		Optional<User> userOptional = userRepository.findById(userId);
 		if (!userOptional.isPresent())
 		{
